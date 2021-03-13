@@ -38,7 +38,19 @@ def normalize(v):
 	return v
 
 def simulate(A,k,u0):
-	
+	sim = np.ones((k, len(u0)))
+	Akn = np.eye(len(A))
+	for i in range(len(u0)):
+		sim[i][0] = u0[i][0]
+	u = u0
+
+	for i in range(1,k):
+		print(sim)
+		Akn = np.matmul(Akn, A)
+		u = np.matmul(Akn, u)
+		for j in range(len(u)):
+			sim[j][i] = u[j][0]
+		print(sim)
 	return sim
 
 """
@@ -49,15 +61,17 @@ main function
 def main():
 
 	A = np.array([[2,1],[1,1]])
-	print(longTime(A))
-	print(getAk(A,2))
+	# print(longTime(A))
+	# print(getAk(A,2))
 
-	v1 = np.array([[0.5**(-1/2)],[0.5**(-1/2)]])
+	# v1 = np.array([[0.5**(-1/2)],[0.5**(-1/2)]])
 	v2 = np.array([[1],[0]])
-	print(error(v1,v2))
+	# print(error(v1,v2))
 
-	v = np.array([[1],[1]])
-	print(normalize(v))
+	# v = np.array([[1],[1]])
+	# print(normalize(v))
+
+	print(simulate(A,2,v2))
 
 	# Scenario A: Frogs
 	frogMat = [[0.0, 0.0, 3.0,  8.0], \
