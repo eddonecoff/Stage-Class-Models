@@ -7,6 +7,7 @@ Date:
 
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 def longTime(A):
 	w,v = np.linalg.eig(A)
@@ -28,12 +29,16 @@ def getAk(A,k):
 	return AK
 
 def error(uCurr, uLong):
+	diff = uCurr - uLong
+	err = np.linalg.norm(diff)
 	return err
 
 def normalize(v):
+	v = v/np.linalg.norm(v)
 	return v
 
 def simulate(A,k,u0):
+	
 	return sim
 
 """
@@ -46,6 +51,13 @@ def main():
 	A = np.array([[2,1],[1,1]])
 	print(longTime(A))
 	print(getAk(A,2))
+
+	v1 = np.array([[0.5**(-1/2)],[0.5**(-1/2)]])
+	v2 = np.array([[1],[0]])
+	print(error(v1,v2))
+
+	v = np.array([[1],[1]])
+	print(normalize(v))
 
 	# Scenario A: Frogs
 	frogMat = [[0.0, 0.0, 3.0,  8.0], \
