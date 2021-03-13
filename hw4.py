@@ -15,6 +15,16 @@ def longTime(A):
 	return(domEig, domVec)
 
 def getAk(A,k):
+	w,v = np.linalg.eig(A)
+
+	P = v
+	Pinv = np.linalg.inv(P)
+
+	Dk = [[0.0 for i in range(len(A))] for j in range(len(A))]
+	for i in range(len(Dk)):
+		Dk[i][i] = w[i]**k
+
+	AK = np.matmul((np.matmul(P,Dk)),Pinv)
 	return AK
 
 def error(uCurr, uLong):
@@ -35,6 +45,7 @@ def main():
 
 	A = np.array([[2,1],[1,1]])
 	print(longTime(A))
+	print(getAk(A,2))
 
 	# Scenario A: Frogs
 	frogMat = [[0.0, 0.0, 3.0,  8.0], \
