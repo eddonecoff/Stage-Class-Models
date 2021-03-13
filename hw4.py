@@ -38,7 +38,7 @@ def normalize(v):
 	return v
 
 def simulate(A,k,u0):
-	sim = np.ones((k, len(u0)))
+	sim = np.ones((len(u0),k))
 	Akn = np.eye(len(A))
 	for i in range(len(u0)):
 		sim[i][0] = u0[i][0]
@@ -60,18 +60,18 @@ main function
 
 def main():
 
-	A = np.array([[2,1],[1,1]])
-	# print(longTime(A))
-	# print(getAk(A,2))
+	# A = np.array([[2,1],[1,1]])
+	# # print(longTime(A))
+	# # print(getAk(A,2))
 
-	# v1 = np.array([[0.5**(-1/2)],[0.5**(-1/2)]])
-	v2 = np.array([[1],[0]])
-	# print(error(v1,v2))
+	# # v1 = np.array([[0.5**(-1/2)],[0.5**(-1/2)]])
+	# v2 = np.array([[1],[0]])
+	# # print(error(v1,v2))
 
-	# v = np.array([[1],[1]])
-	# print(normalize(v))
+	# # v = np.array([[1],[1]])
+	# # print(normalize(v))
 
-	print(simulate(A,2,v2))
+	# print(simulate(A,2,v2))
 
 	# Scenario A: Frogs
 	frogMat = [[0.0, 0.0, 3.0,  8.0], \
@@ -79,6 +79,24 @@ def main():
 			   [0.0, 0.5, 0.0,  0.0], \
 			   [0.0, 0.0, 0.25, 0.0]]
 	frogInit = [[0.0],[0.0],[0.0],[250.0]]
+
+	rate, pop = longTime(frogMat)
+	print("The expected growth rate is")
+	print(rate)
+	print("\n The expected stable population fraction is")
+	print(pop)
+
+	Ak = getAk(frogMat, 250)
+	u250 = np.matmul(Ak, frogInit)
+
+	sim_mat = simulate(frogMat, 250, frogInit)
+	us = sim_mat[:,249]
+	print("u250 = ")
+	print(u250)
+	print("us = ")
+	print(us)
+	print(len(sim_mat))
+	print(len(sim_mat[0]))
 
 	# Scenario B: Owls
 	owlMat = [[0.2,  0.1,  0.4,  1/3], \
