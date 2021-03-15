@@ -40,17 +40,13 @@ def normalize(v):
 def simulate(A,k,u0):
 	sim = np.ones((len(u0),k))
 	Akn = np.eye(len(A))
-	for i in range(len(u0)):
-		sim[i][0] = u0[i][0]
+	sim[:,0, None] = u0
 	u = u0
 
 	for i in range(1,k):
-		print(sim)
 		Akn = np.matmul(Akn, A)
 		u = np.matmul(Akn, u)
-		for j in range(len(u)):
-			sim[j][i] = u[j][0]
-		print(sim)
+		sim[:,i,None] = u
 	return sim
 
 """
@@ -90,13 +86,11 @@ def main():
 	u250 = np.matmul(Ak, frogInit)
 
 	sim_mat = simulate(frogMat, 250, frogInit)
-	us = sim_mat[:,249]
+	us = sim_mat[:,249, None]
 	print("u250 = ")
 	print(u250)
 	print("us = ")
 	print(us)
-	print(len(sim_mat))
-	print(len(sim_mat[0]))
 
 	# Scenario B: Owls
 	owlMat = [[0.2,  0.1,  0.4,  1/3], \
