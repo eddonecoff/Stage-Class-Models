@@ -12,7 +12,8 @@ import math
 def longTime(A):
 	w,v = np.linalg.eig(A)
 	domEig = max(w)
-	domVec = v[np.where(w == domEig)]
+	maxine = np.where(w == domEig)
+	domVec = v[:,maxine]
 	return(domEig, domVec)
 
 def getAk(A,k):
