@@ -96,22 +96,42 @@ def main():
 
 	#Plotting
 
-	# x = [i for i in range(250)]
-	# x = np.array(x)
-	# x.transpose()
+	x = [i for i in range(250)]
+	x = np.array(x)
+	x.transpose()
 
-	# class0 = sim_mat[0,:,None]
+	eggs = sim_mat[0,:,None]
+	tadpoles = sim_mat[1,:,None]
+	metamorphs = sim_mat[2,:,None]
+	frogs = sim_mat[3,:,None]
 
+	plt.figure()
+	fig, ax = plt.subplots()
+	ax.plot(x, eggs, label = "Eggs vs. Time")
+	ax.plot(x, tadpoles, label = "Tadpoles vs. Time")
+	ax.plot(x, metamorphs, label = "Metamorphs vs. Time")
+	ax.plot(x, frogs, label = "Adult Frogs vs. Time")
+	legend = ax.legend(loc = 'upper left')
+	plt.title("Frog Population Stages vs. Time")
+	plt.xlabel("Time (iterations)")
+	plt.ylabel("Population")
+	plt.savefig("frogsimulation.png", bbox_inches = "tight")
+	plt.close('all')
 
-	# plt.figure()
-	# fig, ax = plt.subplots()
-	# ax.plot(x, class0, label = 'y1(x)')
-	# legend = ax.legend(loc = 'upper left')
-	# plt.title('y1 and y2 vs x')
-	# plt.xlabel('x')
-	# plt.ylabel('y')
-	# plt.savefig('y1y2.png', bbox_inches = 'tight')
-	# plt.close('all')
+	u250norm = normalize(u250)
+	err = np.zeros((250, 1))
+	for i in range(250):
+		usnorm = normalize(sim_mat[:,i,None])
+		err[i,0,None] = error(usnorm, u250norm)
+
+	plt.figure()
+	fig, ax = plt.subplots()
+	ax.plot(x, err, label = "Error vs. Time")
+	plt.title("Error vs. Time")
+	plt.xlabel("Time (iterations)")
+	plt.ylabel("Error")
+	plt.savefig("frogerror.png", bbox_inches = "tight")
+	plt.close("all")
 
 	# Scenario B: Owls
 	owlMat = [[0.2,  0.1,  0.4,  1/3], \
@@ -138,6 +158,45 @@ def main():
 
 	er = np.linalg.norm(u250-us) / np.linalg.norm(u250)
 	print(er)
+
+	#Plotting
+
+	x = [i for i in range(250)]
+	x = np.array(x)
+	x.transpose()
+
+	loc1 = sim_mat[0,:,None]
+	loc2 = sim_mat[1,:,None]
+	loc3 = sim_mat[2,:,None]
+	loc4 = sim_mat[3,:,None]
+
+	plt.figure()
+	fig, ax = plt.subplots()
+	ax.plot(x, loc1, label = "Location 1 vs. Time")
+	ax.plot(x, loc2, label = "Location 2 vs. Time")
+	ax.plot(x, loc3, label = "Location 3 vs. Time")
+	ax.plot(x, loc4, label = "Location 4 vs. Time")
+	legend = ax.legend(loc = 'upper left')
+	plt.title("Owl Location Populations vs. Time")
+	plt.xlabel("Time (iterations)")
+	plt.ylabel("Population at Location")
+	plt.savefig("owlsimulation.png", bbox_inches = "tight")
+	plt.close('all')
+
+	u250norm = normalize(u250)
+	err = np.zeros((250, 1))
+	for i in range(250):
+		usnorm = normalize(sim_mat[:,i,None])
+		err[i,0,None] = error(usnorm, u250norm)
+
+	plt.figure()
+	fig, ax = plt.subplots()
+	ax.plot(x, err, label = "Error vs. Time")
+	plt.title("Error vs. Time")
+	plt.xlabel("Time (iterations)")
+	plt.ylabel("Error")
+	plt.savefig("owlerror.png", bbox_inches = "tight")
+	plt.close("all")
 
 if __name__ == '__main__':
 	main()
