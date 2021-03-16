@@ -108,6 +108,7 @@ def main():
 	frogs = sim_mat[3,:,None]
 
 	plt.figure()
+	plt.style.use("classic")
 	fig, ax = plt.subplots()
 	ax.plot(x, eggs, label = "Eggs vs. Time")
 	ax.plot(x, tadpoles, label = "Tadpoles vs. Time")
@@ -126,6 +127,7 @@ def main():
 		err[i,0,None] = error(usnorm, pop)
 
 	plt.figure()
+	plt.style.use("classic")
 	fig, ax = plt.subplots()
 	ax.plot(x, err, label = "Error vs. Time")
 	plt.title("Error vs. Time")
@@ -157,8 +159,8 @@ def main():
 	print("us = ")
 	print(us)
 
-	er = np.linalg.norm(u250-us) / np.linalg.norm(u250)
-	print(er)
+	re = np.linalg.norm(u250-us) / np.linalg.norm(u250)
+	print(re)
 
 	#Plotting
 
@@ -172,6 +174,7 @@ def main():
 	loc4 = sim_mat[3,:,None]
 
 	plt.figure()
+	plt.style.use("classic")
 	fig, ax = plt.subplots()
 	ax.plot(x, loc1, label = "Location 1 vs. Time")
 	ax.plot(x, loc2, label = "Location 2 vs. Time")
@@ -190,6 +193,7 @@ def main():
 		err[i,0,None] = error(usnorm, pop)
 
 	plt.figure()
+	plt.style.use("classic")
 	fig, ax = plt.subplots()
 	ax.plot(x, err, label = "Error vs. Time")
 	plt.title("Error vs. Time")
