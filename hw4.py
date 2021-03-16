@@ -93,8 +93,8 @@ def main():
 	print("us = ")
 	print(us)
 
-	er = np.linalg.norm(u250-us) / np.linalg.norm(u250)
-	print(er)
+	re = np.linalg.norm(u250-us) / np.linalg.norm(u250)
+	print(re)
 
 	#Plotting
 
@@ -120,11 +120,10 @@ def main():
 	plt.savefig("frogsimulation.png", bbox_inches = "tight")
 	plt.close('all')
 
-	u250norm = normalize(u250)
 	err = np.zeros((250, 1))
 	for i in range(250):
 		usnorm = normalize(sim_mat[:,i,None])
-		err[i,0,None] = error(usnorm, u250norm)
+		err[i,0,None] = error(usnorm, pop)
 
 	plt.figure()
 	fig, ax = plt.subplots()
@@ -185,11 +184,10 @@ def main():
 	plt.savefig("owlsimulation.png", bbox_inches = "tight")
 	plt.close('all')
 
-	u250norm = normalize(u250)
 	err = np.zeros((250, 1))
 	for i in range(250):
 		usnorm = normalize(sim_mat[:,i,None])
-		err[i,0,None] = error(usnorm, u250norm)
+		err[i,0,None] = error(usnorm, pop)
 
 	plt.figure()
 	fig, ax = plt.subplots()
