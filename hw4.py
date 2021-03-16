@@ -12,8 +12,9 @@ import math
 def longTime(A):
 	w,v = np.linalg.eig(A)
 	domEig = max(w)
-	maxine = np.where(w == domEig)
-	domVec = v[:,maxine]
+	maxind = np.where(w == domEig)
+	maxind = maxind[0] # must do this to return a normal column vector below
+	domVec = v[:,maxind]
 	return(domEig, domVec)
 
 def getAk(A,k):
